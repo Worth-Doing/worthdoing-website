@@ -127,8 +127,7 @@ export function Navbar() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 shrink-0">
-            <LogoIcon className="h-7 w-7" />
+          <Link href="/" className="flex items-center shrink-0">
             <span className="text-lg font-bold text-brand-gradient">WorthDoing AI</span>
           </Link>
 
