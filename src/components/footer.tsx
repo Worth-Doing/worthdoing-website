@@ -2,7 +2,10 @@ import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="border-t border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-950">
+    <footer className="relative bg-gray-50 dark:bg-[#020617] border-t border-gray-200/10 dark:border-white/5">
+      {/* Gradient divider line */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-500/40 to-transparent" />
+
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 py-12 md:grid-cols-3">
           {/* Branding */}
@@ -80,7 +83,7 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-gray-200 dark:border-gray-800 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="border-t border-gray-200/10 dark:border-white/5 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-gray-400 dark:text-gray-500">
             &copy; 2026 WorthDoing AI. All rights reserved.
           </p>

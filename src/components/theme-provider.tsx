@@ -20,7 +20,7 @@ interface ThemeContextValue {
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
 function getSystemTheme(): "light" | "dark" {
-  if (typeof window === "undefined") return "light";
+  if (typeof window === "undefined") return "dark";
   return window.matchMedia("(prefers-color-scheme: dark)").matches
     ? "dark"
     : "light";
@@ -36,14 +36,14 @@ function applyTheme(resolved: "light" | "dark") {
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>("light");
-  const [resolvedTheme, setResolvedTheme] = useState<"light" | "dark">("light");
+  const [theme, setThemeState] = useState<Theme>("system");
+  const [resolvedTheme, setResolvedTheme] = useState<"light" | "dark">("dark");
   const [mounted, setMounted] = useState(false);
 
   // Initialize from localStorage on mount
   useEffect(() => {
     const stored = localStorage.getItem("worthdoing-theme") as Theme | null;
-    const initial = stored || "light";
+    const initial = stored || "system";
     setThemeState(initial);
 
     const resolved = initial === "system" ? getSystemTheme() : initial;
@@ -78,10 +78,10 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     applyTheme(resolved);
   }, []);
 
-  // Prevent flash of wrong theme
+  // Prevent flash of wrong theme — default to dark for SSR
   if (!mounted) {
     return (
-      <ThemeContext.Provider value={{ theme: "light", setTheme, resolvedTheme: "light" }}>
+      <ThemeContext.Provider value={{ theme: "system", setTheme, resolvedTheme: "dark" }}>
         {children}
       </ThemeContext.Provider>
     );

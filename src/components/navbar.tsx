@@ -123,7 +123,7 @@ export function Navbar() {
   const pathname = usePathname();
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-gray-200/60 dark:border-gray-800/60 bg-white/80 dark:bg-gray-950/80 backdrop-blur-xl">
+    <nav className="sticky top-0 z-50 w-full border-b border-white/10 dark:border-white/5 bg-white/80 dark:bg-[#030712]/80 backdrop-blur-xl">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
@@ -140,10 +140,10 @@ export function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+                  className={`px-4 py-2 text-sm font-medium rounded-lg transition-all ${
                     isActive
-                      ? "text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-800"
-                      : "text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800/50"
+                      ? "text-gray-900 dark:text-white bg-black/5 dark:bg-white/10"
+                      : "text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5"
                   }`}
                 >
                   {link.label}
@@ -158,13 +158,13 @@ export function Navbar() {
               href="https://github.com/Worth-Doing"
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden sm:inline-flex h-9 w-9 items-center justify-center rounded-lg text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800/50 hover:text-gray-900 dark:hover:text-white transition-colors"
+              className="hidden sm:inline-flex h-9 w-9 items-center justify-center rounded-lg text-gray-500 dark:text-gray-400 hover:bg-black/5 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white transition-all"
             >
               <GitHubIcon className="h-5 w-5" />
             </a>
             <button
               onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-              className="h-9 w-9 inline-flex items-center justify-center rounded-lg text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800/50 hover:text-gray-900 dark:hover:text-white transition-colors"
+              className="h-9 w-9 inline-flex items-center justify-center rounded-lg text-gray-500 dark:text-gray-400 hover:bg-black/5 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white transition-all"
               aria-label="Toggle dark mode"
             >
               {resolvedTheme === "dark" ? (
@@ -175,7 +175,7 @@ export function Navbar() {
             </button>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="h-9 w-9 inline-flex items-center justify-center rounded-lg text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800/50 md:hidden transition-colors"
+              className="h-9 w-9 inline-flex items-center justify-center rounded-lg text-gray-500 dark:text-gray-400 hover:bg-black/5 dark:hover:bg-white/5 md:hidden transition-all"
               aria-label="Toggle menu"
             >
               {mobileOpen ? (
@@ -194,7 +194,7 @@ export function Navbar() {
           mobileOpen ? "max-h-60 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <div className="border-t border-gray-200/60 dark:border-gray-800/60 px-4 py-3 space-y-1">
+        <div className="border-t border-white/10 dark:border-white/5 px-4 py-3 space-y-1">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
             return (
@@ -202,10 +202,10 @@ export function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className={`block rounded-lg px-4 py-2.5 text-sm font-medium transition-colors ${
+                className={`block rounded-lg px-4 py-2.5 text-sm font-medium transition-all ${
                   isActive
-                    ? "text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-800"
-                    : "text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50"
+                    ? "text-gray-900 dark:text-white bg-black/5 dark:bg-white/10"
+                    : "text-gray-500 dark:text-gray-400 hover:bg-black/5 dark:hover:bg-white/5"
                 }`}
               >
                 {link.label}
@@ -216,7 +216,7 @@ export function Navbar() {
             href="https://github.com/Worth-Doing"
             target="_blank"
             rel="noopener noreferrer"
-            className="block rounded-lg px-4 py-2.5 text-sm font-medium text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50"
+            className="block rounded-lg px-4 py-2.5 text-sm font-medium text-gray-500 dark:text-gray-400 hover:bg-black/5 dark:hover:bg-white/5"
           >
             GitHub
           </a>

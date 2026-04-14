@@ -124,23 +124,23 @@ const categories = ["All", "AI Tools", "Capabilities", "Infrastructure"] as cons
 
 const techColors: Record<string, string> = {
   TypeScript:
-    "bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300",
+    "bg-blue-500/10 text-blue-400 dark:bg-blue-500/15 dark:text-blue-300 border border-blue-500/20",
   Python:
-    "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/40 dark:text-yellow-300",
-  "C++": "bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300",
+    "bg-yellow-500/10 text-yellow-600 dark:bg-yellow-500/15 dark:text-yellow-300 border border-yellow-500/20",
+  "C++": "bg-purple-500/10 text-purple-600 dark:bg-purple-500/15 dark:text-purple-300 border border-purple-500/20",
   "Node.js":
-    "bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-300",
+    "bg-green-500/10 text-green-600 dark:bg-green-500/15 dark:text-green-300 border border-green-500/20",
   "Next.js":
-    "bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900",
-  React: "bg-cyan-100 text-cyan-700 dark:bg-cyan-900/40 dark:text-cyan-300",
+    "bg-gray-500/10 text-gray-700 dark:bg-white/10 dark:text-white border border-gray-500/20",
+  React: "bg-cyan-500/10 text-cyan-600 dark:bg-cyan-500/15 dark:text-cyan-300 border border-cyan-500/20",
   TailwindCSS:
-    "bg-teal-100 text-teal-700 dark:bg-teal-900/40 dark:text-teal-300",
+    "bg-teal-500/10 text-teal-600 dark:bg-teal-500/15 dark:text-teal-300 border border-teal-500/20",
   Metal:
-    "bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-200",
+    "bg-gray-500/10 text-gray-600 dark:bg-gray-500/15 dark:text-gray-300 border border-gray-500/20",
 };
 
 const defaultTechColor =
-  "bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-300";
+  "bg-gray-500/10 text-gray-600 dark:bg-gray-500/15 dark:text-gray-300 border border-gray-500/20";
 
 // ---------------------------------------------------------------------------
 // Status badge helper
@@ -216,28 +216,23 @@ export default function ProjectsPage() {
       : projects.filter((p) => p.category === activeCategory);
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100">
+    <div className="min-h-screen bg-white dark:bg-[#030712] text-gray-900 dark:text-gray-100">
       {/* ----------------------------------------------------------------- */}
       {/* Hero */}
       {/* ----------------------------------------------------------------- */}
       <section className="relative overflow-hidden">
-        {/* faint gradient backdrop */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 -z-10 opacity-30 dark:opacity-20"
-          style={{
-            background:
-              "radial-gradient(ellipse 80% 60% at 50% 0%, #3b82f6 0%, #06b6d4 40%, #22c55e 100%)",
-          }}
-        />
+        {/* Grid pattern */}
+        <div className="absolute inset-0 grid-pattern" />
 
-        <div className="mx-auto max-w-5xl px-6 pt-28 pb-16 text-center sm:pt-36 sm:pb-20">
-          <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
-            <span className="bg-gradient-to-r from-blue-600 via-cyan-500 to-green-500 bg-clip-text text-transparent">
-              Our Projects
-            </span>
+        {/* Glow orbs */}
+        <div className="glow-orb w-[500px] h-[500px] bg-blue-500/15 dark:bg-blue-500/8 top-0 left-1/4" />
+        <div className="glow-orb w-[400px] h-[400px] bg-cyan-500/15 dark:bg-cyan-500/8 top-10 right-1/4" />
+
+        <div className="relative z-10 mx-auto max-w-5xl px-6 pt-28 pb-16 text-center sm:pt-36 sm:pb-20">
+          <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl mb-6 animate-fade-up">
+            <span className="text-gradient">Our Projects</span>
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-600 dark:text-gray-400">
+          <p className="mx-auto max-w-2xl text-lg leading-8 text-gray-500 dark:text-gray-400 animate-fade-up" style={{animationDelay: "0.1s"}}>
             Open-source tools powering the next generation of AI applications.
           </p>
         </div>
@@ -251,10 +246,10 @@ export default function ProjectsPage() {
           <button
             key={cat}
             onClick={() => setActiveCategory(cat)}
-            className={`rounded-full px-5 py-2 text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
+            className={`rounded-full px-5 py-2 text-sm font-medium transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 ${
               activeCategory === cat
-                ? "bg-gray-900 text-white dark:bg-white dark:text-gray-900"
-                : "bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
+                ? "bg-gradient-to-r from-blue-500 via-cyan-500 to-emerald-500 text-white shadow-lg shadow-cyan-500/20"
+                : "glass-card text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
             }`}
           >
             {cat}
@@ -266,14 +261,15 @@ export default function ProjectsPage() {
       {/* Card grid */}
       {/* ----------------------------------------------------------------- */}
       <section className="mx-auto max-w-5xl px-6 pb-24">
-        <div className="grid gap-8 sm:grid-cols-2">
-          {filtered.map((project) => (
+        <div className="grid gap-6 sm:grid-cols-2">
+          {filtered.map((project, i) => (
             <article
               key={project.name}
-              className="group flex flex-col rounded-xl border border-gray-200 bg-white transition-all duration-200 hover:-translate-y-1 hover:shadow-lg dark:border-gray-800 dark:bg-gray-900"
+              className="group flex flex-col rounded-2xl glass-card gradient-border overflow-hidden animate-fade-up"
+              style={{animationDelay: `${i * 0.06}s`}}
             >
               {/* Card body */}
-              <div className="flex flex-1 flex-col p-6">
+              <div className="relative z-10 flex flex-1 flex-col p-6">
                 {/* Header row */}
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-center gap-3">
@@ -286,7 +282,7 @@ export default function ProjectsPage() {
                   </div>
 
                   {/* Status badge */}
-                  <span className="mt-1 flex shrink-0 items-center gap-1.5 rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-700 dark:bg-gray-800 dark:text-gray-300">
+                  <span className="mt-1 flex shrink-0 items-center gap-1.5 rounded-full glass-card px-3 py-1 text-xs font-medium text-gray-600 dark:text-gray-300">
                     <span
                       className={`inline-block h-2 w-2 rounded-full ${statusColor(
                         project.status
@@ -297,7 +293,7 @@ export default function ProjectsPage() {
                 </div>
 
                 {/* Description */}
-                <p className="mt-4 text-sm leading-6 text-gray-600 dark:text-gray-400">
+                <p className="mt-4 text-sm leading-6 text-gray-500 dark:text-gray-400">
                   {project.description}
                 </p>
 
@@ -305,7 +301,7 @@ export default function ProjectsPage() {
                 <ul className="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-sm text-gray-500 dark:text-gray-400">
                   {project.highlights.map((h) => (
                     <li key={h} className="flex items-center gap-1.5">
-                      <span className="text-green-500">&#10003;</span>
+                      <span className="text-emerald-400">&#10003;</span>
                       {h}
                     </li>
                   ))}
@@ -327,12 +323,12 @@ export default function ProjectsPage() {
               </div>
 
               {/* Card footer — links */}
-              <div className="flex items-center gap-3 border-t border-gray-100 px-6 py-4 dark:border-gray-800">
+              <div className="relative z-10 flex items-center gap-3 border-t border-gray-200/10 dark:border-white/5 px-6 py-4">
                 <a
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-gray-700 dark:bg-gray-100 dark:text-gray-900 dark:hover:bg-gray-300"
+                  className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-blue-500 via-cyan-500 to-emerald-500 px-4 py-2 text-sm font-medium text-white transition-all hover:shadow-lg hover:shadow-cyan-500/20 hover:scale-[1.02] active:scale-[0.98]"
                 >
                   <GitHubIcon className="h-4 w-4" />
                   GitHub
@@ -344,7 +340,7 @@ export default function ProjectsPage() {
                     href={`https://www.npmjs.com/package/${project.npm}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
+                    className="inline-flex items-center gap-2 rounded-lg glass-card px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:scale-[1.02] active:scale-[0.98] transition-all"
                   >
                     <NpmIcon className="h-4 w-4" />
                     npm
