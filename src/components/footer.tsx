@@ -38,22 +38,6 @@ export function Footer() {
                   Projects
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="/capabilities"
-                  className="text-sm text-gray-500 dark:text-gray-400 transition-colors hover:text-gray-900 dark:hover:text-gray-100"
-                >
-                  Capabilities
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/agent"
-                  className="text-sm text-gray-500 dark:text-gray-400 transition-colors hover:text-gray-900 dark:hover:text-gray-100"
-                >
-                  Agent
-                </Link>
-              </li>
             </ul>
           </div>
 
@@ -65,7 +49,7 @@ export function Footer() {
             <ul className="space-y-2.5">
               <li>
                 <a
-                  href="https://github.com/WorthDoingAI"
+                  href="https://github.com/Worth-Doing"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm text-gray-500 dark:text-gray-400 transition-colors hover:text-gray-900 dark:hover:text-gray-100"
@@ -75,7 +59,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="https://www.npmjs.com/org/worthdoing"
+                  href="https://www.npmjs.com/package/worthdoing-capabilities"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm text-gray-500 dark:text-gray-400 transition-colors hover:text-gray-900 dark:hover:text-gray-100"

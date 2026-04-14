@@ -1,14 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { useTheme } from "@/components/theme-provider";
 
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/projects", label: "Projects" },
-  { href: "/capabilities", label: "Capabilities" },
-  { href: "/agent", label: "Agent" },
 ];
 
 function SunIcon({ className }: { className?: string }) {
@@ -90,44 +89,82 @@ function CloseIcon({ className }: { className?: string }) {
   );
 }
 
+function LogoIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="none">
+      <circle cx="12" cy="4" r="2.5" fill="url(#logo-grad)" />
+      <circle cx="5" cy="18" r="2.5" fill="url(#logo-grad)" />
+      <circle cx="19" cy="18" r="2.5" fill="url(#logo-grad)" />
+      <line x1="12" y1="6.5" x2="5" y2="15.5" stroke="url(#logo-grad)" strokeWidth="1.5" />
+      <line x1="12" y1="6.5" x2="19" y2="15.5" stroke="url(#logo-grad)" strokeWidth="1.5" />
+      <line x1="5" y1="18" x2="19" y2="18" stroke="url(#logo-grad)" strokeWidth="1.5" />
+      <defs>
+        <linearGradient id="logo-grad" x1="0" y1="0" x2="24" y2="24">
+          <stop offset="0%" stopColor="#3b82f6" />
+          <stop offset="50%" stopColor="#06b6d4" />
+          <stop offset="100%" stopColor="#10b981" />
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}
+
+function GitHubIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+    </svg>
+  );
+}
+
 export function Navbar() {
   const { resolvedTheme, setTheme } = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  const toggleTheme = () => {
-    setTheme(resolvedTheme === "dark" ? "light" : "dark");
-  };
+  const pathname = usePathname();
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-gray-200/60 dark:border-gray-800/60 bg-white/70 dark:bg-gray-950/70 backdrop-blur-xl">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <nav className="sticky top-0 z-50 w-full border-b border-gray-200/60 dark:border-gray-800/60 bg-white/80 dark:bg-gray-950/80 backdrop-blur-xl">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 shrink-0">
-            <span className="text-xl font-bold text-brand-gradient">
-              WorthDoing AI
-            </span>
+          <Link href="/" className="flex items-center gap-2.5 shrink-0">
+            <LogoIcon className="h-7 w-7" />
+            <span className="text-lg font-bold text-brand-gradient">WorthDoing AI</span>
           </Link>
 
-          {/* Desktop navigation */}
+          {/* Desktop nav */}
           <div className="hidden md:flex md:items-center md:gap-1">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 rounded-lg transition-colors hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800/50"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+                    isActive
+                      ? "text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-800"
+                      : "text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800/50"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </div>
 
-          {/* Right side: theme toggle + mobile menu */}
-          <div className="flex items-center gap-2">
-            {/* Theme toggle */}
+          {/* Right: GitHub + theme + mobile */}
+          <div className="flex items-center gap-1">
+            <a
+              href="https://github.com/Worth-Doing"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:inline-flex h-9 w-9 items-center justify-center rounded-lg text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800/50 hover:text-gray-900 dark:hover:text-white transition-colors"
+            >
+              <GitHubIcon className="h-5 w-5" />
+            </a>
             <button
-              onClick={toggleTheme}
-              className="relative inline-flex h-9 w-9 items-center justify-center rounded-lg text-gray-600 dark:text-gray-400 transition-colors hover:bg-gray-100 dark:hover:bg-gray-800/50 hover:text-gray-900 dark:hover:text-gray-100"
+              onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+              className="h-9 w-9 inline-flex items-center justify-center rounded-lg text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800/50 hover:text-gray-900 dark:hover:text-white transition-colors"
               aria-label="Toggle dark mode"
             >
               {resolvedTheme === "dark" ? (
@@ -136,11 +173,9 @@ export function Navbar() {
                 <MoonIcon className="h-5 w-5" />
               )}
             </button>
-
-            {/* Mobile hamburger */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-gray-600 dark:text-gray-400 transition-colors hover:bg-gray-100 dark:hover:bg-gray-800/50 md:hidden"
+              className="h-9 w-9 inline-flex items-center justify-center rounded-lg text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800/50 md:hidden transition-colors"
               aria-label="Toggle menu"
             >
               {mobileOpen ? (
@@ -153,23 +188,40 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile menu */}
-      {mobileOpen && (
-        <div className="border-t border-gray-200/60 dark:border-gray-800/60 md:hidden">
-          <div className="space-y-1 px-4 py-3">
-            {navLinks.map((link) => (
+      {/* Mobile menu with transition */}
+      <div
+        className={`overflow-hidden transition-all duration-300 ease-in-out md:hidden ${
+          mobileOpen ? "max-h-60 opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <div className="border-t border-gray-200/60 dark:border-gray-800/60 px-4 py-3 space-y-1">
+          {navLinks.map((link) => {
+            const isActive = pathname === link.href;
+            return (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className="block rounded-lg px-4 py-2.5 text-sm font-medium text-gray-600 dark:text-gray-400 transition-colors hover:bg-gray-100 dark:hover:bg-gray-800/50 hover:text-gray-900 dark:hover:text-gray-100"
+                className={`block rounded-lg px-4 py-2.5 text-sm font-medium transition-colors ${
+                  isActive
+                    ? "text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-800"
+                    : "text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50"
+                }`}
               >
                 {link.label}
               </Link>
-            ))}
-          </div>
+            );
+          })}
+          <a
+            href="https://github.com/Worth-Doing"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block rounded-lg px-4 py-2.5 text-sm font-medium text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50"
+          >
+            GitHub
+          </a>
         </div>
-      )}
+      </div>
     </nav>
   );
 }

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import type { Metadata } from "next";
 
 // ---------------------------------------------------------------------------
 // Data
@@ -91,6 +90,17 @@ const projects: Project[] = [
       "GGUF support",
       "Web UI",
     ],
+    category: "Infrastructure",
+  },
+  {
+    name: "WorthDoing Website",
+    emoji: "\u{1F310}",
+    description:
+      "Official website and landing page for WorthDoing AI. Built with Next.js 15, TypeScript, and Tailwind CSS 4.",
+    tech: ["Next.js", "React", "TypeScript", "TailwindCSS"],
+    status: "Active Development",
+    github: "https://github.com/Worth-Doing/worthdoing-website",
+    highlights: ["Dark/light theme", "Responsive", "Zero UI deps", "Static export"],
     category: "Infrastructure",
   },
   {
@@ -206,7 +216,7 @@ export default function ProjectsPage() {
       : projects.filter((p) => p.category === activeCategory);
 
   return (
-    <div className="min-h-screen bg-white dark:bg-black text-gray-900 dark:text-gray-100">
+    <div className="min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100">
       {/* ----------------------------------------------------------------- */}
       {/* Hero */}
       {/* ----------------------------------------------------------------- */}

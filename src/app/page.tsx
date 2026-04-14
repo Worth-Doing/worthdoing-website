@@ -240,7 +240,7 @@ export default function Home() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
-              href="https://github.com/WorthDoingAI"
+              href="https://github.com/Worth-Doing"
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-500 via-cyan-500 to-emerald-500 px-8 text-sm font-semibold text-white shadow-lg shadow-cyan-500/25 transition-all hover:shadow-xl hover:shadow-cyan-500/30 hover:scale-[1.02] active:scale-[0.98]"
@@ -354,7 +354,7 @@ export default function Home() {
           </div>
 
           <a
-            href="https://github.com/WorthDoingAI"
+            href="https://github.com/Worth-Doing"
             target="_blank"
             rel="noopener noreferrer"
             className="group inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-500 via-cyan-500 to-emerald-500 px-8 text-sm font-semibold text-white shadow-lg shadow-cyan-500/25 transition-all hover:shadow-xl hover:shadow-cyan-500/30 hover:scale-[1.02] active:scale-[0.98]"
